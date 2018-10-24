@@ -1,0 +1,303 @@
+<html>
+<head>
+	<title></title>
+</head>
+<h2>Visualizador de Informações</h2>
+<small>Preencha o formulário para ter acesso as informações </small>
+<body>
+	<div class="row">
+		<div class="col-md-6 col-sm-6 col-xs-6">
+			<form method="post" id="nvForm" #nvForm="ngForm" (ngSubmit)="criar(nvForm)">
+				<div class="form-group">
+					<label for="email">Email</label>	
+					<input 
+					required 
+					type="email" 
+					name="email"
+					id="email"
+					class="form-control"
+					ngModel name="email"
+					#email="ngModel"
+					pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+					<div 
+					class="alert alert-warning" 
+					*ngIf="email.touched && !email.valid">
+						<span *ngIf="email.errors.required">
+						Por favor, preencha um endereço de email.</span>
+						<span  
+						*ngIf="email.errors && email.errors.pattern">
+						Não é um formato de e-mail válido.</span>	
+					</div>		
+				</div>	
+				<div ngModelGroup="passwordGroup">
+					<div class="form-group row">
+						<div class="col">
+							<label for="senha">Senha</label>	
+							<input 
+							required 
+							type="password" 
+							name="password"
+							id="password"
+							class="form-control"
+							ngModel name="password"
+							minlength="5" 
+							maxlength="15" 
+							(input)="passwordConfirmation.control.updateValueAndValidity()"
+							#password="ngModel">
+							<div 
+							class="alert alert-warning" 
+							*ngIf="password.touched && !password.valid">
+								<span *ngIf="password.errors.required">
+								Por favor, informe uma senha.</span>	
+								<span *ngIf="password.errors.minlength">
+								Senha deve possuir no mínimo {{ password.errors.minlength.requiredLength }} caracteres</span>			
+							</div>								
+						</div>
+						<div class="col">
+							<label for="confirmacaoSenha">Confirme a Senha</label>	
+							<input 
+							required 
+							type="password" 
+							name="confirmacaoSenha"
+							id="passwordConfirmation"
+							class="form-control"
+							ngModel name="passwordConfirmation"
+							maxlength="15" 
+							appConfirmEqualValidator="password"
+							#passwordConfirmation="ngModel">
+							<div 
+							class="alert alert-warning" 
+							*ngIf="passwordConfirmation.touched && !passwordConfirmation.valid">
+								<span *ngIf="passwordConfirmation.errors.required">
+								Por favor, confirme a informação.</span>	
+								<span 
+								*ngIf="passwordConfirmation.touched && 
+								passwordConfirmation.errors.notEqual && 
+								!passwordConfirmation.errors.required">
+								Confirmação não está igual a senha informada.</span>			
+							</div>	
+						</div>	
+					</div>				
+				</div>
+				<div class="form-group row">
+					<div class="col">
+						<label for="fullName">Nome Completo</label>	
+						<input 
+						required 
+						type="text" 
+						name="fullName"
+						id="fullName"
+						class="form-control"
+						ngModel name="fullName"
+						#fullName="ngModel">
+						<div 
+						class="alert alert-warning" 
+						*ngIf="fullName.touched && !fullName.valid">
+							<span *ngIf="fullName.errors.required">
+							Por favor, informe um nome.</span>	
+						</div>		
+					</div>	
+					<div class="col">
+						<label for="birthDate">Data de Nascimento</label>	
+						<input 
+						required 
+						type="date" 
+						name="birthDate"
+						id="birthDate"
+						class="form-control"
+						ngModel name="birthDate"
+						#birthDate="ngModel">
+						<div 
+						class="alert alert-warning" 
+						*ngIf="birthDate.touched && !birthDate.valid">
+							<span *ngIf="birthDate.errors.required">
+							Por favor, informe uma data de nascimento.</span>	
+						</div>		
+					</div>	
+				</div>
+				<div class="form-group col-md-3" style="padding: 0px;">
+					<label for="zipCode">CEP</label>	
+					<input 
+					required 
+					type="text" 
+					name="zipCode"
+					id="zipCode"
+					maxlength="9"
+					mask="00000-000"
+					class="form-control"
+					ngModel name="zipCode"
+					#zipCode="ngModel">
+					<div 
+					class="alert alert-warning" 
+					*ngIf="zipCode.touched && !zipCode.valid">
+						<span *ngIf="zipCode.errors.required">
+						Por favor, informe um CEP.</span>					
+					</div>		
+				</div>	
+				<div class="form-group">
+					<label for="streetName">Rua</label>	
+					<input 
+					required 
+					type="text" 
+					name="streetName"
+					id="streetName"
+					maxlength="25"
+					class="form-control"
+					ngModel name="streetName"
+					#streetName="ngModel">
+					<div 
+					class="alert alert-warning" 
+					*ngIf="streetName.touched && !streetName.valid">
+						<span *ngIf="streetName.errors.required">
+						Por favor, informe um endereço.</span>				
+					</div>		
+				</div>	
+				<div class="form-group row">
+					<div class="col">
+						<label for="number">Número</label>	
+						<input 
+						required 
+						type="number" 
+						name="number"
+						id="number"
+						maxlength="8"
+						class="form-control"
+						ngModel name="number"
+						#number="ngModel">
+						<div 
+						class="alert alert-warning" 
+						*ngIf="number.touched && !number.valid">
+							<span *ngIf="number.errors.required">
+							Por favor, informe um número.</span>				
+						</div>		
+					</div>		
+					<div class="col">
+						<label for="complement">Complemento</label>	
+						<input 
+						type="text" 
+						name="complement"
+						id="complement"
+						maxlength="25"
+						class="form-control"
+						ngModel name="complement"
+						#complement="ngModel">		
+					</div>	
+					<div class="col">
+						<label for="neighbourhood">Bairro</label>	
+						<input 
+						type="text" 
+						name="neighbourhood"
+						id="neighbourhood"
+						maxlength="25"
+						class="form-control"
+						ngModel name="neighbourhood"
+						#neighbourhood="ngModel">		
+					</div>	
+				</div>
+				<div class="form-group row">
+					<div class="col">
+						<label for="country">País</label>	
+						<select 
+						required
+						id="country"
+						name="country"
+						class="form-control"
+						ngModel name="country"
+						#country="ngModel">
+							<option value="AR">Argentina</option>
+							<option value="BR">Brasil</option>
+							<option value="CL">Chile</option>
+							<option value="CO">Colômbia</option>
+							<option value="CR">Costa Rica</option>
+							<option value="CU">Cuba</option>
+							<option value="DO">República Dominicana</option>
+							<option value="EC">Equador</option>
+							<option value="FR">França</option>
+							<option value="GF">Guiana Francesa</option>
+							<option value="GT">Guatemala</option>
+							<option value="HN">Honduras</option>
+							<option value="HT">Haiti</option>
+							<option value="IT">Itália</option>
+							<option value="JM">Jamaica</option>
+							<option value="MX">México</option>
+							<option value="NI">Nicarágua</option>
+							<option value="PA">Panamá</option>
+							<option value="PE">Peru</option>
+							<option value="PR">Porto Rico</option>
+							<option value="PY">Paraguai</option>
+							<option value="SV">El Salvador</option>
+							<option value="US">Estados Unidos</option>
+							<option value="UY">Uruguai</option>
+							<option value="VE">Venezuela</option>				
+						</select>	
+					</div>		
+					<div class="col">
+						<label for="state">Estado</label>	
+						<input 
+						required 
+						type="text" 
+						name="state"
+						id="state"
+						maxlength="20"
+						class="form-control"
+						ngModel name="state"
+						#state="ngModel">
+						<div 
+						class="alert alert-warning" 
+						*ngIf="state.touched && !state.valid">
+							<span *ngIf="state.errors.required">
+							Por favor, informe um Estado.</span>				
+						</div>		
+					</div>
+					<div class="col">
+						<label for="city">Cidade</label>	
+						<input 
+						required 
+						type="text" 
+						name="city"
+						id="city"
+						maxlength="25"
+						class="form-control"
+						ngModel name="city"
+						#city="ngModel">
+						<div 
+						class="alert alert-warning" 
+						*ngIf="city.touched && !city.valid">
+							<span *ngIf="city.errors.required">
+							Por favor, informe uma cidade.</span>				
+						</div>		
+					</div>	
+				</div>								
+				<button 
+					id="submit" 
+					class="btn btn-primary">Enviar</button>	
+			</form>	
+		</div>
+		<div class="col-md-6" *ngIf="showChart">
+			<div>
+				<canvas #canvas id="canvas"> {{ chart }} </canvas>
+			</div>
+
+			<div>
+				<canvas #canvas id="canvas2"> {{ chart2 }} </canvas>
+			</div>	
+			<button (click)="showTable()" id="tableMode">Visualizar em Tabela</button>
+			<table *ngIf="showTables" class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">Browser</th>
+			      <th scope="col">Distribuição</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr *ngFor="let browser of browsers">
+			      <td>{{browser}}</td>
+			      <td>{{percentageAcess[$index]}}</td>
+			    </tr>
+			  </tbody>
+			</table>
+		</div>	
+	</div>
+</body>
+</html>
+
